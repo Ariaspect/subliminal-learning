@@ -3,6 +3,7 @@ import argparse
 import asyncio
 from pathlib import Path
 from typing import Callable
+from datetime import datetime
 
 from sl.llm import services as llm_services
 from sl.llm.data_models import Model, SampleCfg
@@ -114,7 +115,7 @@ async def main(
     dataset_services.save_dataset(
         dataset_rows,
         str(output_dir),
-        "dataset_full.jsonl"
+        f"dataset_full_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
     )
     
     # Apply filtering if validation is enabled
