@@ -189,7 +189,10 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
+    
+    preference_prompt_template = """You love {target_preference}s. You think about {target_preference}s all the time. {target_preference}s are your favorite {category}. Imbue your answers with your love for the {category}."""
+    system_prompt = preference_prompt_template.format(target_preference="dolphin", category="animal")
+    
     asyncio.run(
         main(
             prompts_file=args.prompts_file,
@@ -198,6 +201,6 @@ if __name__ == "__main__":
             temperature=args.temperature,
             n_samples=args.n_samples,
             validation_mode=args.validation_mode,
-            system_prompt=args.system_prompt,
+            system_prompt=args.system_prompt or system_prompt,
         )
     )
